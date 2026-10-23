@@ -1,289 +1,207 @@
-# InternSpark Cybersecurity Internship – Task 3
+# 🛡️ InternSpark Cybersecurity Internship — Task 03
+
 ## Wireshark Packet Analysis & Network Traffic Investigation
 
-![Wireshark](https://img.shields.io/badge/Tool-Wireshark-blue?logo=wireshark&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey?logo=windows&logoColor=white)
-![Category](https://img.shields.io/badge/Domain-Network%20Security-red)
-![Task](https://img.shields.io/badge/InternSpark-Task%2003-orange)
-![Status](https://img.shields.io/badge/Project-Completed-success)
+<p align="center">
+  <img src="https://img.shields.io/badge/InternSpark-Cybersecurity%20Internship-blue" alt="InternSpark Cybersecurity Internship">
+  <img src="https://img.shields.io/badge/Task-03-orange" alt="Task 03">
+  <img src="https://img.shields.io/badge/Tool-Wireshark-1679A7" alt="Wireshark">
+  <img src="https://img.shields.io/badge/Platform-Windows-0078D4" alt="Windows">
+  <img src="https://img.shields.io/badge/Focus-Network%20Security-red" alt="Network Security">
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen" alt="Completed">
+</p>
 
 ---
 
 ## 📌 Project Overview
 
-This repository documents the practical work completed for **Task 3: Wireshark Packet Analysis** as part of the **InternSpark Cybersecurity Internship**.
+This repository documents the practical work completed for **Task 03: Wireshark Packet Analysis** as part of the InternSpark Cybersecurity Internship.
 
-The project focuses on capturing and examining live network traffic using Wireshark to understand how common network protocols operate. The analysis covers Domain Name System (DNS) traffic, TCP connection establishment, TCP control flags, and packets identified by Wireshark as retransmissions.
+The objective of this task was to capture and analyze network traffic using **Wireshark**, a widely used network protocol analyzer. The captured packets were examined to understand how devices communicate over a network and how common network protocols behave during real-time communication.
 
-Through practical packet inspection and display filtering, this project demonstrates fundamental network analysis techniques used in network troubleshooting, traffic investigation, and cybersecurity monitoring.
+The analysis focused on DNS queries and responses, TCP connection establishment, TCP control flags, packet structure, and retransmission indicators reported by Wireshark.
 
-The analysis was conducted on the author's own Windows laptop using its Wi-Fi network interface for educational purposes.
+This project provides hands-on experience in network traffic inspection, packet-level analysis, and identifying communication patterns that may require further investigation.
 
-## 🎯 Project Objectives
+## 🎯 Objectives
 
-The primary objectives of this task were to:
+- Capture live network traffic from the Wi-Fi interface.
+- Understand DNS queries and responses used for domain name resolution.
+- Examine TCP packets and identify SYN and SYN-ACK flags.
+- Understand the role of TCP acknowledgements and connection-management flags.
+- Inspect packet headers and packet bytes using Wireshark's packet details and byte panes.
+- Analyze packets marked by Wireshark as suspected retransmissions.
+- Document observations using screenshots and a packet capture file.
 
-- Capture live network traffic using Wireshark.
-- Understand the structure and purpose of network packets.
-- Identify DNS queries and responses generated during domain resolution.
-- Analyze TCP SYN and SYN-ACK packets involved in connection establishment.
-- Examine TCP ACK packets and understand acknowledgement behavior.
-- Identify packets labelled as TCP retransmissions.
-- Practice Wireshark display filters for protocol-specific investigation.
-- Document practical observations with screenshots and a packet capture file.
-- Understand the difference between normal network behavior, troubleshooting indicators, and confirmed security findings.
-
-## 🛠️ Tools & Technologies
+## 🧰 Tools & Technologies
 
 | Tool / Technology | Purpose |
 |---|---|
-| Wireshark 4.6.9 | Capturing, filtering, and inspecting network packets |
-| Npcap 1.88 | Packet capture support on Windows |
-| Windows | Operating system used for the practical exercise |
-| Wi-Fi Network Interface | Interface selected for live packet capture |
-| PCAPNG | File format used to save the captured network traffic |
+| Wireshark 4.6.9 | Capturing and analyzing network packets |
+| Windows | Operating system used for the practical |
+| Wi-Fi Network Interface | Source interface for live packet capture |
+| Wireshark Display Filters | Isolating DNS, TCP flags, and retransmission indicators |
+| PCAPNG | Saving captured network traffic for later inspection |
 
-## 🔬 Scope of the Assessment
+## 🔬 Practical Methodology
 
-The practical exercise focused on observing selected network protocols and TCP behavior within a limited capture session.
+### 1. Live Network Traffic Capture
 
-**Included in scope:**
-- Live network traffic capture.
-- DNS query and response inspection.
-- TCP SYN packet identification.
-- TCP SYN-ACK packet identification.
-- TCP ACK packet filtering.
-- TCP retransmission indicator analysis.
-- Screenshot documentation and preservation of packet capture evidence.
+Wireshark was launched on Windows and the active Wi-Fi network interface was selected for packet capture. Live traffic generated by normal network activity was collected for analysis.
 
-**Outside the scope:**
-- Penetration testing of external systems.
-- Exploitation of network services.
-- Decryption of HTTPS traffic.
-- Confirmation of malicious activity or a security breach.
-- Comprehensive network-wide vulnerability assessment.
-
-## 🧪 Methodology
-
-### 1. Network Traffic Capture
-
-Wireshark was launched on Windows, and the Wi-Fi network interface was selected to capture live packets.
-
-The capture was allowed to collect ordinary network traffic generated during the session. The captured traffic was then examined using display filters to isolate relevant protocols and TCP packet types.
+The capture included multiple protocols and communication patterns generated during ordinary network usage.
 
 ### 2. DNS Traffic Analysis
 
-**Display filter:**
+DNS packets were isolated using the following display filter:
 
 ```text
 dns
 ```
 
-The DNS display filter was used to isolate DNS packets from the captured traffic.
+The filtered packets showed DNS queries and responses for domain names, including observed requests related to `www.google.com` and `ab.chatgpt.com`.
 
-DNS is responsible for resolving domain names into IP addresses and providing other domain-related records. Inspecting DNS traffic helps demonstrate how devices perform domain lookups when communicating with online services.
+DNS response packets included address records and, in some cases, additional record types. This demonstrated how DNS helps applications resolve domain names to network addresses.
 
-The captured evidence showed DNS queries and responses associated with domain lookups, including visible entries for `www.google.com` and `chatgpt.com`.
+### 3. TCP Connection Analysis
 
-**Evidence:** [View DNS Query and Response Screenshot](screenshots/01_dns_query_response.png)
+TCP packets were examined using display filters to identify connection-establishment flags.
 
-### 3. TCP SYN Packet Analysis
-
-**Display filter:**
+**SYN packets:**
 
 ```text
 tcp.flags.syn == 1 && tcp.flags.ack == 0
 ```
 
-This filter identifies TCP packets with the SYN flag enabled and the ACK flag disabled.
-
-A SYN packet is typically used to initiate a TCP connection. Examining these packets helps identify connection attempts and understand how TCP communication begins.
-
-**Evidence:** [View TCP SYN Screenshot](screenshots/02_tcp_syn.png)
-
-### 4. TCP SYN-ACK Packet Analysis
-
-**Display filter:**
+**SYN-ACK packets:**
 
 ```text
 tcp.flags.syn == 1 && tcp.flags.ack == 1
 ```
 
-This filter identifies TCP packets containing both SYN and ACK flags.
-
-During a normal TCP three-way handshake, the server or receiving endpoint typically responds to an initial SYN with a SYN-ACK packet. This acknowledges the connection request and participates in establishing the connection.
-
-The captured screenshot provides evidence of packets matching this filter. However, the filter does not independently prove that every connection completed a successful handshake.
-
-**Evidence:** [View TCP SYN-ACK Screenshot](screenshots/03_tcp_syn_ack.png)
-
-### 5. TCP ACK Packet Analysis
-
-**Display filter:**
+**ACK packets without payload:**
 
 ```text
 tcp.flags.syn == 0 && tcp.flags.ack == 1 && tcp.len == 0
 ```
 
-This filter displays TCP packets with the SYN flag disabled, the ACK flag enabled, and zero TCP payload length.
+These filters helped isolate different TCP packet types. SYN packets initiate connection establishment, SYN-ACK packets indicate a response to a connection request, and ACK packets acknowledge received data or control information.
 
-TCP acknowledgements communicate receipt of data or connection-related information. Such packets are commonly seen during TCP communication.
+### 4. TCP Retransmission Analysis
 
-This filter can display ordinary ACK packets as well as packets that may participate in connection establishment. Therefore, the filtered output should not be interpreted as containing only the third packet of the TCP three-way handshake.
-
-**Evidence:** [View TCP ACK Screenshot](screenshots/04_tcp_ack.png)
-
-### 6. TCP Retransmission Analysis
-
-**Display filter:**
+The following filter was used to identify packets marked by Wireshark as TCP retransmissions:
 
 ```text
 tcp.analysis.retransmission
 ```
 
-This filter identifies packets that Wireshark marks as TCP retransmissions according to its packet-analysis heuristics.
+Wireshark displayed multiple packets with retransmission annotations, including packets associated with TCP traffic over port 443 and other observed connections.
 
-TCP retransmissions may occur when acknowledgements are delayed or missing, packets are lost, or network conditions affect communication. They can be useful indicators when investigating connectivity or performance issues.
+Retransmission indicators may be associated with packet loss, delayed acknowledgements, network congestion, or capture-related limitations. These observations alone do not establish the exact cause.
 
-The capture contained multiple packets labelled as retransmissions. These observations warrant context-aware interpretation but do not independently confirm packet loss, a network fault, a security vulnerability, or a malicious attack.
+### 5. Packet Structure Inspection
 
-**Evidence:** [View TCP Retransmission Screenshot](screenshots/05_tcp_retransmission.png)
+Selected packets were examined in Wireshark's packet details and packet-bytes panes.
 
-## 📊 Findings & Observations
+The inspection included:
 
-| No. | Observation | Evidence | Interpretation |
-|---|---|---|---|
-| 1 | DNS queries and responses were visible | DNS filter screenshot | Demonstrates DNS traffic during domain lookups |
-| 2 | TCP SYN packets were observed | SYN filter screenshot | Indicates packets matching the initial TCP SYN filter |
-| 3 | TCP SYN-ACK packets were observed | SYN-ACK filter screenshot | Indicates packets matching the SYN-ACK filter |
-| 4 | TCP ACK packets were displayed | ACK filter screenshot | Demonstrates TCP acknowledgement traffic with zero payload |
-| 5 | Multiple retransmission-labelled packets were displayed | Retransmission filter screenshot | Provides an observation for further network-level investigation if persistent |
+- Frame information and captured packet length.
+- Ethernet source and destination information.
+- IPv4 source and destination addresses.
+- TCP source and destination ports.
+- TCP sequence and acknowledgement numbers.
+- TCP control flags and payload length.
+- Raw packet bytes displayed in hexadecimal and ASCII form.
 
-### Interpretation of Findings
+This helped connect the packet summary shown in the packet list with the underlying protocol fields.
 
-The practical exercise successfully demonstrated how Wireshark display filters can be used to isolate DNS and TCP traffic from a live packet capture.
+## 📊 Key Findings & Observations
 
-The observed retransmission indicators may be useful during network troubleshooting. However, determining their cause would require additional investigation, such as examining packet timestamps, TCP sequence and acknowledgement numbers, repeated captures, and the relevant network conditions.
+### DNS Communication
 
-**No confirmed security vulnerability or malicious activity was established by this exercise.**
+DNS traffic was successfully isolated and inspected. The captured traffic contained DNS queries and responses for multiple domains. The results demonstrated domain name resolution and the exchange of DNS records between the client and DNS infrastructure.
+
+### TCP Connection Establishment
+
+The SYN and SYN-ACK filters returned matching TCP packets in the capture. The packet summaries showed connection attempts and server responses, including traffic involving destination port 443.
+
+The observations illustrate how TCP uses control flags to establish and manage connections.
+
+### TCP Acknowledgements
+
+Packets containing ACK flags and zero TCP payload length were visible in the filtered results. Such packets can carry acknowledgement or connection-control information without carrying application payload.
+
+### Retransmission Indicators
+
+Wireshark marked multiple packets as suspected TCP retransmissions. These packets were recorded as analysis observations for further investigation. The capture does not independently prove whether the underlying cause was packet loss, congestion, delayed responses, or another network condition.
+
+### Packet-Level Inspection
+
+The packet details and hexadecimal views exposed protocol fields beyond the basic packet-list summary. This provided practical experience interpreting network-layer and transport-layer information.
 
 ## 📸 Screenshots & Evidence
 
-The following screenshots document the practical analysis performed in Wireshark.
+The repository contains screenshots documenting the packet capture and analysis process.
 
-### 1. DNS Query and Response Analysis
+| Evidence | Description |
+|---|---|
+| DNS Traffic Analysis | DNS queries and responses isolated using the `dns` filter |
+| TCP SYN Analysis | TCP packets filtered using the SYN flag |
+| TCP SYN-ACK Analysis | TCP responses filtered using SYN and ACK flags |
+| TCP ACK Analysis | ACK packets with zero TCP payload length |
+| TCP Retransmission Analysis | Packets marked by Wireshark as suspected retransmissions |
+| Packet Details & Bytes | Protocol fields and raw packet bytes inspected in Wireshark |
 
-![DNS Query and Response Analysis](screenshots/01_dns_query_response.png)
-
-*Figure 1: DNS packets isolated using the `dns` display filter.*
-
-[Open Screenshot](screenshots/01_dns_query_response.png)
-
-### 2. TCP SYN Packet Analysis
-
-![TCP SYN Packet Analysis](screenshots/02_tcp_syn.png)
-
-*Figure 2: Initial TCP SYN packets identified using TCP flag filtering.*
-
-[Open Screenshot](screenshots/02_tcp_syn.png)
-
-### 3. TCP SYN-ACK Packet Analysis
-
-![TCP SYN-ACK Packet Analysis](screenshots/03_tcp_syn_ack.png)
-
-*Figure 3: TCP packets matching the SYN-ACK display filter.*
-
-[Open Screenshot](screenshots/03_tcp_syn_ack.png)
-
-### 4. TCP ACK Packet Analysis
-
-![TCP ACK Packet Analysis](screenshots/04_tcp_ack.png)
-
-*Figure 4: TCP acknowledgement packets with zero payload length.*
-
-[Open Screenshot](screenshots/04_tcp_ack.png)
-
-### 5. TCP Retransmission Analysis
-
-![TCP Retransmission Analysis](screenshots/05_tcp_retransmission.png)
-
-*Figure 5: Packets identified by Wireshark as TCP retransmissions.*
-
-[Open Screenshot](screenshots/05_tcp_retransmission.png)
+Open the [`screenshots/`](screenshots/) folder to view the available evidence.
 
 ## 📁 Repository Structure
 
 ```text
 INTERNSPARK_CS_03/
 │
-├── README.md
+├── capture/
+│   └── [Saved Wireshark packet capture file]
+│
+├── report/
+│   └── [Wireshark Packet Analysis Report PDF]
 │
 ├── screenshots/
-│   ├── 01_dns_query_response.png
-│   ├── 02_tcp_syn.png
-│   ├── 03_tcp_syn_ack.png
-│   ├── 04_tcp_ack.png
-│   └── 05_tcp_retransmission.png
+│   └── [Screenshots of packet analysis]
 │
-├── capture/
-│   └── internspark_task3_capture.pcapng
-│
-└── report/
-    └── InternSpark_Task3_Wireshark_Packet_Analysis_Report.pdf
+└── README.md
 ```
 
-*The structure above documents the intended organization. Ensure the actual filenames and folder contents match before submission.*
+*Note: The structure above describes the intended organization. The actual filenames may differ depending on the files uploaded to the repository.*
 
-## 🛡️ Recommendations & Best Practices
+## 🧠 Key Learnings
 
-Based on the scope of this exercise, the following practices are recommended:
+- Gained practical experience with Wireshark and live packet capture.
+- Learned to filter DNS traffic and inspect DNS queries and responses.
+- Understood the role of TCP SYN, SYN-ACK, and ACK flags.
+- Practiced using display filters to isolate specific packet types.
+- Learned to interpret Wireshark retransmission annotations cautiously.
+- Explored packet headers, ports, sequence numbers, and raw packet bytes.
+- Improved understanding of network troubleshooting and packet-level investigation.
 
-1. **Investigate persistent retransmissions:** If retransmissions occur repeatedly, perform additional captures and examine connection-level details before identifying a cause.
-2. **Inspect TCP sequence information:** Review sequence numbers, acknowledgement numbers, timestamps, and relevant packet context when troubleshooting.
-3. **Compare multiple capture sessions:** Repeated observations can help distinguish isolated events from persistent network behavior.
-4. **Protect capture files:** PCAPNG files may contain IP addresses, hostnames, device metadata, and other potentially sensitive information. Review them before sharing.
-5. **Use authorized environments:** Capture traffic only on devices and networks for which appropriate permission is available.
-6. **Avoid unsupported conclusions:** Do not classify retransmissions as an attack or vulnerability without corroborating evidence.
+## 🔐 Security & Ethical Considerations
 
-These are general recommendations for network analysis and are not claims that a specific vulnerability was discovered.
+This task was conducted for educational and cybersecurity learning purposes using network traffic available on the system's Wi-Fi interface.
 
-## ⚠️ Limitations
+Packet captures may contain device addresses, domain names, and other potentially sensitive metadata. Such information should be handled responsibly and should not be shared publicly without reviewing it for privacy concerns.
 
-- The analysis was limited to the traffic visible during a single capture session.
-- Network conditions and packet counts can change over time.
-- Display filters identify packets matching specified conditions but do not, by themselves, establish the cause of a network event.
-- Retransmission labels require additional context before drawing conclusions about network performance.
-- Encrypted HTTPS application payloads were not decrypted as part of this exercise.
-- No comprehensive penetration test or vulnerability assessment was performed.
+The observations documented in this repository are limited to the captured traffic. They do not establish that the network, device, or any remote service is compromised.
 
-## 📚 Learning Outcomes
+## ✅ Conclusion
 
-Through this task, the following practical skills were developed:
+Task 03 provided hands-on experience in capturing and analyzing network traffic using Wireshark. DNS filtering demonstrated domain name resolution, TCP flag analysis illustrated connection-management behaviour, and retransmission filtering helped identify packets requiring further investigation.
 
-- Capturing live network traffic using Wireshark.
-- Filtering DNS queries and responses.
-- Understanding TCP SYN, SYN-ACK, and ACK flags.
-- Applying TCP display filters for packet inspection.
-- Recognizing Wireshark retransmission indicators.
-- Documenting network observations using screenshots.
-- Preserving packet capture evidence for further analysis.
-- Distinguishing observed network behavior from confirmed security findings.
+The practical strengthened foundational skills in packet analysis, network protocol interpretation, and evidence-based cybersecurity documentation.
 
-## 📄 Project Report
+## ⚠️ Disclaimer
 
-The detailed report for this task is available in the repository:
-
-**[📄 View Wireshark Packet Analysis Report (PDF)](report/InternSpark_Task3_Wireshark_Packet_Analysis_Report.pdf)**
-
-The report provides the methodology, packet-analysis observations, supporting evidence, limitations, and recommendations in a formal technical-report format.
-
-## ⚖️ Disclaimer
-
-This project was conducted for educational purposes as part of the InternSpark Cybersecurity Internship. Packet capture was performed on the author's own device and network interface.
-
-The findings describe observations from the available capture evidence only. They should not be treated as proof of a security vulnerability, malicious activity, or a network incident without further validation.
+This repository was created for educational purposes as part of the InternSpark Cybersecurity Internship. Packet observations represent the captured session and should not be interpreted as proof of a security vulnerability, malicious activity, or a confirmed network fault without additional evidence.
 
 ---
 
-**InternSpark Cybersecurity Internship | Task 3 – Wireshark Packet Analysis**
-
+**Author:** [raghav-marda](https://github.com/raghav-marda)  
+**Repository:** [INTERNSPARK_CS_03](https://github.com/raghav-marda/INTERNSPARK_CS_03)
